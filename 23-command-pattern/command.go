@@ -35,7 +35,9 @@ func (b *ReceiverB) Execute() {
 /*创建Command接口*/
 type Command interface {
 	Call()
+//忘记写撤销undo了，在Call时记录被执行前的状态到栈里，然后在undo时取出之前的状态还原
 }
+
 //创建具体command struct
 type ConcreteCommandA struct {
 	Receiver
@@ -55,6 +57,7 @@ func (cb *ConcreteCommandB) Call() {
 /*创建调用者， 实现添加，执行命令*/
 type Invoker struct {
 	list []Command
+	//忘记写撤销undo了，取出最后的那个Command，执行这个Command的undo
 }
 
 func (in *Invoker) AddCommand(c Command) {
